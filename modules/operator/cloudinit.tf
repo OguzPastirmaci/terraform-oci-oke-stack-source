@@ -29,12 +29,12 @@ data "cloudinit_config" "operator" {
       package_update  = true
       package_upgrade = var.upgrade
       packages = compact([
-        "git",
-        "jq",
+        #"git",
+        #"jq",
         #"python3-oci-cli",
         #var.install_helm ? "helm" : null,
         var.install_istioctl ? "istio-istioctl" : null,
-        var.install_kubectl_from_repo ? "kubectl": null,
+        #var.install_kubectl_from_repo ? "kubectl": null,
       ])
       yum_repos = {
         "${local.developer_EPEL}" = {
@@ -108,9 +108,9 @@ data "cloudinit_config" "operator" {
       content_type = "text/cloud-config"
       content = jsonencode({
         runcmd = [
-          "curl -fsSL -o install_oci_cli.sh https://raw.githubusercontent.com/oracle/oci-cli/master/scripts/install/install.sh",
-          "chmod 700 install_oci_cli.sh",
-          "./install_oci_cli.sh --accept-all-defaults",
+          "curl -fsSL -o /home/ubuntu/install_oci_cli.sh https://raw.githubusercontent.com/oracle/oci-cli/master/scripts/install/install.sh",
+          "chmod 700 /home/ubuntu/install_oci_cli.sh",
+          "/home/ubuntu/install_oci_cli.sh --accept-all-defaults",
         ]
       })
       filename   = "20-ocicli.yml"

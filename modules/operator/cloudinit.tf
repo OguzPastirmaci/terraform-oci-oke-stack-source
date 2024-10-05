@@ -162,7 +162,7 @@ data "cloudinit_config" "operator" {
           "curl https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash",
         ]
       })
-      filename   = "20-kubectx.yml"
+      filename   = "20-helm.yml"
       merge_type = local.default_cloud_init_merge_type
     }
   }

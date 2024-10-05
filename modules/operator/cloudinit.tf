@@ -31,8 +31,8 @@ data "cloudinit_config" "operator" {
       packages = compact([
         "git",
         "jq",
-        "python3-oci-cli",
-        var.install_helm ? "helm" : null,
+        #"python3-oci-cli",
+        #var.install_helm ? "helm" : null,
         var.install_istioctl ? "istio-istioctl" : null,
         var.install_kubectl_from_repo ? "kubectl": null,
       ])
@@ -101,6 +101,19 @@ data "cloudinit_config" "operator" {
     merge_type = local.default_cloud_init_merge_type
   }
 
+  # OCI CLI installation
+  dynamic "part" {
+    content {
+      content_type = "text/cloud-config"
+      content = jsonencode({
+        runcmd = [
+          "bash -c "$(curl -L https://raw.githubusercontent.com/oracle/oci-cli/master/scripts/install/install.sh)" -- --accept-all-defaults"],
+      })
+      filename   = "20-ocicli.yml"
+      merge_type = local.default_cloud_init_merge_type
+    }
+  }
+
   # kubectl installation
   dynamic "part" {
     for_each = var.install_kubectl_from_repo ? [] : [1]
@@ -129,6 +142,21 @@ data "cloudinit_config" "operator" {
           "git clone https://github.com/ahmetb/kubectx /opt/kubectx",
           "ln -s /opt/kubectx/kubectx /usr/bin/kubectx",
           "ln -s /opt/kubectx/kubens /usr/bin/kubens",
+        ]
+      })
+      filename   = "20-kubectx.yml"
+      merge_type = local.default_cloud_init_merge_type
+    }
+  }
+
+  # Helm installation
+  dynamic "part" {
+    for_each = var.install_helm ? [1] : []
+    content {
+      content_type = "text/cloud-config"
+      content = jsonencode({
+        runcmd = [
+          "curl https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash",
         ]
       })
       filename   = "20-kubectx.yml"

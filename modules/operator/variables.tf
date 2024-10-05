@@ -19,14 +19,8 @@ variable "install_cilium" { type = bool }
 variable "install_helm" { type = bool }
 variable "install_istioctl" { type = bool }
 variable "install_k9s" { type = bool }
-variable "install_oci_cli" {
-  type = bool
-  default = true
-}
-variable "install_kubectl_from_repo" { 
-  type    = bool
-  default = true
-}
+variable "install_oci_cli" {type = bool}
+variable "install_kubectl_from_repo" {type = bool}
 variable "install_kubectx" { type = bool }
 variable "kubeconfig" { type = string }
 variable "kubernetes_version" { type = string }

@@ -2,11 +2,11 @@
 # Licensed under the Universal Permissive License v 1.0 as shown at https://oss.oracle.com/licenses/upl
 
 module "extensions" {
-  source   = "./modules/extensions"
-  depends_on = [ module.network ]
-  count    = alltrue([var.create_cluster, local.operator_enabled]) ? 1 : 0
-  region   = var.region
-  state_id = local.state_id
+  source     = "./modules/extensions"
+  depends_on = [module.network]
+  count      = alltrue([var.create_cluster, local.operator_enabled]) ? 1 : 0
+  region     = var.region
+  state_id   = local.state_id
 
   # Cluster
   kubernetes_version  = var.kubernetes_version
@@ -109,6 +109,6 @@ module "extensions" {
   mpi_operator_version        = var.mpi_operator_version
 
   # Service Account
-  create_service_account               = var.create_service_account
-  service_accounts                     = var.service_accounts
+  create_service_account = var.create_service_account
+  service_accounts       = var.service_accounts
 }

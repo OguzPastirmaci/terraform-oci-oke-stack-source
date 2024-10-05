@@ -89,6 +89,12 @@ variable "operator_install_kubectx" {
   type        = bool
 }
 
+variable "operator_install_oci_cli" {
+  default     = true
+  description = "Whether to install OCI CLI"
+  type        = bool
+}
+
 variable "operator_shape" {
   default = {
     shape            = "VM.Standard.E4.Flex",

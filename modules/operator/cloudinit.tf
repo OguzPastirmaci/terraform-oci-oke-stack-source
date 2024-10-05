@@ -109,8 +109,7 @@ data "cloudinit_config" "operator" {
       content = jsonencode({
         runcmd = [
           "curl -fsSL -o /home/ubuntu/install_oci_cli.sh https://raw.githubusercontent.com/oracle/oci-cli/master/scripts/install/install.sh",
-          "chmod 700 /home/ubuntu/install_oci_cli.sh",
-          "/home/ubuntu/install_oci_cli.sh --accept-all-defaults",
+          "bash /home/ubuntu/install_oci_cli.sh --accept-all-defaults",
         ]
       })
       filename   = "20-ocicli.yml"

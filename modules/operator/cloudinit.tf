@@ -32,6 +32,7 @@ data "cloudinit_config" "operator" {
         #"git",
         #"jq",
         #"python3-oci-cli",
+        python3-pip,
         #var.install_helm ? "helm" : null,
         var.install_istioctl ? "istio-istioctl" : null,
         #var.install_kubectl_from_repo ? "kubectl": null,
@@ -107,8 +108,7 @@ data "cloudinit_config" "operator" {
       content_type = "text/cloud-config"
       content = jsonencode({
         runcmd = [
-          "curl -fsSL -o /home/ubuntu/install_oci_cli.sh https://raw.githubusercontent.com/oracle/oci-cli/master/scripts/install/install.sh",
-          "bash /home/ubuntu/install_oci_cli.sh --accept-all-defaults",
+          "pip3 install oci-cli",
         ]
       })
       filename   = "20-ocicli.yml"

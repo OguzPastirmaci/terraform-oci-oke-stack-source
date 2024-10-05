@@ -104,7 +104,6 @@ data "cloudinit_config" "operator" {
   # OCI CLI installation
   part {
     #for_each = var.install_oci_cli ? [] : [1]
-    content {
       content_type = "text/cloud-config"
       content = jsonencode({
         runcmd = [
@@ -114,13 +113,11 @@ data "cloudinit_config" "operator" {
       })
       filename   = "20-ocicli.yml"
       merge_type = local.default_cloud_init_merge_type
-    }
   }
 
   # kubectl installation
   part {
     #for_each = var.install_kubectl_from_repo ? [] : [1]
-    content {
       content_type = "text/cloud-config"
       content = jsonencode({
         runcmd = [
@@ -132,7 +129,6 @@ data "cloudinit_config" "operator" {
       })
       filename   = "20-kubectl.yml"
       merge_type = local.default_cloud_init_merge_type
-    }
   }
 
   # kubectx/kubens installation

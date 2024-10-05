@@ -165,7 +165,7 @@ data "cloudinit_config" "operator" {
       content_type = "text/cloud-config"
       content = jsonencode({
         runcmd = [
-          "curl -LO https://github.com/derailed/k9s/releases/download/v0.27.2/k9s_Linux_amd64.tar.gz",
+          "curl -LO https://github.com/derailed/k9s/releases/download/v0.32.5/k9s_Linux_amd64.tar.gz",
           "tar -xvzf k9s_Linux_amd64.tar.gz && mv ./k9s /usr/bin/k9s",
         ]
       })
